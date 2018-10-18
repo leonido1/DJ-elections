@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    {% block head %}
+    {% endblock %}
+
+  {% load static %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'commons/js/scripts'  %}"></script>
+
+</head>
+<body>
+
+   <nav class="navbar navbar-light navbar-expand-lg" style="background-color: LightSkyBlue  ;" >
+ <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">BIJoes</a>
+
+     <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myDropDown"  style="background-color:white;" >
+          <span class="icon-bar"  style="background-color:LightSkyBlue;"></span>
+          <span class="icon-bar"  style="background-color:LightSkyBlue;"></span>
+          <span class="icon-bar"  style="background-color:LightSkyBlue;"></span>
+     </button>
+    </div>
+
+     <div class="collapse navbar-collapse" id="myDropDown">
+    <ul class="nav navbar-nav">
+      <li ><a href="/user/main">Main</a></li>
+      <li><a href="/" onclick="return confirm('confirm log out')">
+          <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+
+    </ul>
+  </div>
+  </div>
+</nav>
+
+    {% block body %}
+    {% endblock %}
+
+</body>
+</html>
+<script>
+    {% block script %}
+    {% endblock %}
+</script>

@@ -1,0 +1,64 @@
+h1 {
+   color: #ea503f;
+   font-family: courier;
+   font-style: italic;
+   font-size: 2cm ;
+ }
+
+    .btn{
+    margin-top:15px;
+    margin-left:10px;
+    }
+
+    #subBtn{
+
+        margin-top:0px;
+        margin-left:0px;
+        background: linear-gradient(#00dcff, #002bff);
+    }
+
+#btnCon{
+    display:inline-block;
+    float: left;
+    clear: left ;
+    margin-left:35%;
+    height: 1cm;
+
+}
+
+.container { height: 1cm;}
+
+.custom-header{
+
+    background-color:LightSkyBlue;
+
+}
+
+ #myWell{
+
+    width: 46%;
+     background-color:LightSkyBlue;
+
+
+}
+
+body {
+
+    height:100%;
+    position:relative;
+}
+#addSong {
+
+    height:10%;
+    position:absolute;
+    bottom:1cm;
+
+}
+
+@media only screen and (max-device-width : 630px) {
+
+    #btnCon{ margin-left:30%;}
+    #myWell {width: 60%;}
+
+
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+  <script>
+
+var success = false;
+
+		(function poll() {
+    setTimeout(function() {
+        $.ajax({
+            url: "http://localhost:8000/updateCheck/{{djName}}",
+            type: "GET",
+            success: function(data) {
+				 location.replace("http://localhost:8000/elections/{{djName}}")
+
+
+            },
+			error: function(data) {
+                console.log("failed");
+            },
+            dataType: "json",
+            complete: poll,
+            crossDomain : true
+
+        })
+    }, 5000);
+})();
+
+
+
+
+
+		</script>

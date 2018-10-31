@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<center>
+<div class="loader"></div>
+</center>
+
 </body>
 </html>
 
@@ -25,11 +29,16 @@ var success = false;
 		(function poll() {
     setTimeout(function() {
         $.ajax({
-            url: "http://localhost:8000/updateCheck/{{djName}}",
+            url: "http://localhost:8000/updateCheck/{{DjName}}",
             type: "GET",
             success: function(data) {
-				 location.replace("http://localhost:8000/elections/{{djName}}")
 
+                if(data['value'] == 'yes'){
+            location.replace("http://localhost:8000/electionsInAction/" + data['id']);
+
+            }
+
+             console.log(data['value']);
 
             },
 			error: function(data) {
@@ -48,3 +57,41 @@ var success = false;
 
 
 		</script>
+
+
+<style>
+html,body{
+    height: 100%;
+
+}
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #FF9999;
+  border-bottom: 16px solid #FF9999;
+  width: 220px;
+  height: 220px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin-top:20%;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  10% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+ @media only screen and (max-device-width : 630px){
+
+     .loader{ margin-top:70%;}
+
+ }
+
+</style>

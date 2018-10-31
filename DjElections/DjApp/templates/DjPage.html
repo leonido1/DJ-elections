@@ -1,10 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Page</title>
+
+    {% load static %}
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+	<script src="{% static 'lou-multi-select-e052211\js\jquery.multi-select.js' %}"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'lou-multi-select-e052211\css\multi-select.css' %}">
+
+{% csrf_token %}
+
+
 </head>
+
 <body>
-$END$
+
+
+<center>
+    <h1> choose songs </h1>
+</center>
+
+
+
+<div  style = "position: relative;  top: 35%;  transform: translateY(-50%); height:50%;">
+<center style = " height:50%;">
+
+    <form action="/user/MainAction" method="POST">
+    {% csrf_token %}
+        <select multiple="multiple"  id="my-select" name="my-select[]" >
+
+
+
+        {% for song in Songs %}
+
+        <option value= "{{song.id}}"> {{song.name}} {{song.artist}}</option>
+
+        {% endfor %}
+
+    </select>
+
+	</center>
+
+<div id="btnCon" class="container">
+
+  <button type = "submit" name = "Election" value = "e" class = "btn btn-success">Start Elections</button>
+  <button type = "submit" name = "Delete"  class = "btn btn-danger">Delete Song</button>
+  <button type = "submit" name = "Log-out" class = "btn btn-warning">Log-out</button>
+
+</div>
+</form>
+
+	</div>
+
+
+
+<div id="addSong" class = col-sm-12>
+<center>
+
+
+  <div id="myWell" class="well">
+
+       <form class="form-inline"  action="/user/addSong" method="POST">
+    {% csrf_token %}
+  <input type="text" class="form-control"  name="song" id="song" placeholder="Song Name">
+
+
+    <input type="text"  class="form-control" name="artist" id="artist" placeholder="Artist">
+
+
+  <button type="submit" class="btn btn-primary" id="subBtn">Add Song</button>
+</form>
+
+
+  </div>
+
+</center>
+
+</div>
+
 </body>
-</html>
+
+<script>
+
+
+    $('#my-select').multiSelect({selectableHeader: "<div class='custom-header'>Playlist</div>"
+    ,selectionHeader: "<div class='custom-header'>Selected Songs</div>"});
+
+
+</script>
+
+<style>
+
+h1 {
+   color: #ea503f;
+   font-family: courier;
+   font-style: italic;
+   font-size: 2cm ;
+ }
+
+    .btn{
+    margin-top:15px;
+    margin-left:10px;
+    }
+
+    #subBtn{
+
+        margin-top:0px;
+        margin-left:0px;
+        background: linear-gradient(#00dcff, #002bff);
+    }
+
+#btnCon{
+    display:inline-block;
+    float: left;
+    clear: left ;
+    margin-left:35%;
+    height: 1cm;
+
+}
+
+.container { height: 1cm;}
+
+.custom-header{
+
+    background-color:LightSkyBlue;
+
+}
+
+ #myWell{
+
+    width: 46%;
+     background-color:LightSkyBlue;
+
+
+}
+
+body {
+
+    height:100%;
+    position:relative;
+}
+#addSong {
+
+    height:10%;
+    position:absolute;
+    bottom:1cm;
+
+}
+
+@media only screen and (max-device-width : 630px) {
+
+    #btnCon{ margin-left:30%;}
+    #myWell {width: 60%;}
+
+
+}
+
+</style>
+

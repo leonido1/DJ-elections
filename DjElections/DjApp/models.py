@@ -8,9 +8,12 @@ class DJ (User):
 
 
 class Song (models.Model):
-    dj =  models.ManyToManyField(DJ)
+    dj =  models.ForeignKey(DJ,on_delete=models.CASCADE)
     name = models.TextField()
     artist = models.TextField()
+
+    def __str__(self):
+        return self.name+" "+self.artist
 
 
 class Elections(models.Model):
@@ -23,6 +26,8 @@ class SongsInElections(models.Model):
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
     votes =  models.IntegerField()
 
+    def vote(self):
+        self.votes = self.votes+1
 
 
 

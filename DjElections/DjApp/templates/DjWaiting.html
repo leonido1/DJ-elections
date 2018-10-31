@@ -1,10 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+
+   {% load static %}
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'Attractive-jQuery-Circular-Countdown-Timer-Plugin-TimeCircles/inc/TimeCircles.js' %}"></script>
+<link href="TimeCircles.css" rel="{% static 'Attractive-jQuery-Circular-Countdown-Timer-Plugin-TimeCircles/inc/TimeCircles.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script>
+$(document).ready(function(){
+   $("#DateCountdown").TimeCircles({
+    "animation": "smooth",
+    "bg_width": 1.2,
+    "fg_width": 0.1,
+    "circle_bg_color": "#60686F",
+
+       "count_past_zero": false,
+
+
+    "time": {
+        "Days": {
+            "text": "Days",
+            "color": "#FFCC66",
+            "show": false
+        },
+        "Hours": {
+            "text": "Hours",
+            "color": "#99CCFF",
+            "show": false
+        },
+        "Minutes": {
+            "text": "Minutes",
+            "color": "#BBFFBB",
+            "show": false
+        },
+        "Seconds": {
+            "text": "",
+            "color": "#FF9999",
+            "show": true
+        }
+    }
+}).addListener(countdownComplete);;
+    });
+
+
+function countdownComplete(unit, value, total) {
+
+    if(total<=0){
+	    window.location.replace('http://localhost:8000/finishElections');
+	}
+    
+}
+
+</script>
 </head>
 <body>
-$END$
+<center>
+    <h1>Election is Running</h1>
+</center>
+
+
+<div id="DateCountdown" data-date="{{time}}" ></div>
+
 </body>
 </html>
+
+
+<style>
+
+div span::before{
+
+}
+
+div span{
+visibility: hidden;
+font-size:0px;
+margin-left: 39%;
+margin-bottom:0px;
+margin-top:0px;
+}
+
+div h4{
+margin:0px;
+}
+
+
+#DateCountdown{
+margin-left: 35%;
+width:30%;
+}
+
+body,html{
+background:rgb(255, 250, 230);
+height : 100%;
+position:relative;
+}
+
+.btn{
+background:radial-gradient( #fdf497 , #fdf497 );
+ font-weight: bold;
+ margin-top:2%;
+ width:100%;
+
+
+ }
+
+  @media only screen and (max-device-width : 630px) {
+
+#btnCon{
+margin-top:20%;
+
+}
+
+.btn{
+margin-top:5%;
+}
+
+#DateCountdown{
+width:40%;
+margin-left:30%;
+margin-top:20%;
+}
+
+
+}
+
+
+</style>

@@ -1,53 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" >
 <head>
-
-   <meta charset="utf-8">
+  <title>Login</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    {% block head %}
-    {% endblock %}
-
-  {% load static %}
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{% static 'commons/js/scripts'  %}"></script>
+
 
 </head>
-<body>
+<body >
 
-   <nav class="navbar navbar-light navbar-expand-lg" style="background-color: LightSkyBlue  ;" >
- <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">BIJoes</a>
 
-     <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myDropDown"  style="background-color:white;" >
-          <span class="icon-bar"  style="background-color:LightSkyBlue;"></span>
-          <span class="icon-bar"  style="background-color:LightSkyBlue;"></span>
-          <span class="icon-bar"  style="background-color:LightSkyBlue;"></span>
-     </button>
+<div class="row" style="height:150px"><br>
     </div>
+<div class="container-fluid" >
+<div class="row">
+<br>
+</div>
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+<div class="panel panel-default" >
+   <div class="panel-heading" style ="background-color: #38e1ff;">login</div>
+   <div class="panel-body">
 
-     <div class="collapse navbar-collapse" id="myDropDown">
-    <ul class="nav navbar-nav">
-      <li ><a href="/user/main">Main</a></li>
-      <li><a href="/" onclick="return confirm('confirm log out')">
-          <span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
 
-    </ul>
+<form  action="/user/main" method="POST" >
+
+ {% csrf_token %}
+    <div class="input-group" >
+      <span class="input-group-addon" ><i class="glyphicon glyphicon-music" ></i></span>
+      <input id="DJ" type="text" class="form-control" name="DJ" placeholder="DJ">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input id="password" type="password" class="form-control" name="password" placeholder="password">
+    </div>
+    <br>
+
+      <div class="row">
+
+
+
+    <center>
+{% csrf_token %}
+    <button type="submit"  style="width:35%;" class="btn btn-">login</button>
+</center>
+
+      </div>
+
+  </form>
   </div>
   </div>
-</nav>
-
-    {% block body %}
-    {% endblock %}
+  </div>
+</div>
 
 </body>
 </html>
-<script>
-    {% block script %}
-    {% endblock %}
-</script>
+
+<style>
+
+
+    button,.input-group-addon{
+
+        background-color: #38e1ff;
+
+}
+
+    html {
+  height: 100%;
+}
+
+
+    body {
+  min-height: 100%;
+}
+
+</style>
+
+
+

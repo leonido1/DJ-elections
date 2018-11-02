@@ -58,7 +58,8 @@ $(document).ready(function(){
 
  {% for song in songs %}
 <form  action="/vote" method="POST" >
-  <button type="submit" name="song" id="song" value="{{song.id}}" class="btn btn-outline-warning">{{song.artist}} {{song.name}}
+  {% csrf_token %}
+    <button type="submit" name="song" id="song" value="{{song.id}}" class="btn btn-outline-warning">{{song.artist}} {{song.name}}
   </button>
 </form>
 

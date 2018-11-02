@@ -3,7 +3,6 @@ from django.template import loader
 from django.http import JsonResponse
 from django.contrib.auth import authenticate
 from django.db import transaction
-from django.template import Context, Template
 from .models import *
 from datetime import datetime,timezone,timedelta
 from .utils import *
@@ -80,10 +79,10 @@ def mainAction(request):
 
 def checkUpDate (request,djName=""):
 
-    present = datetime.now(timezone.utc)+timedelta(hours=3)
+    present = datetime.now(timezone.utc)+timedelta(hours=2)
     dj = DJ.objects.filter(username=djName).first()
     elections = Elections.objects.filter(dj=dj).order_by('-endTime').first()
-    print(present)
+
     if not elections:
         JsonResponse({'value': 'no'})
 
@@ -112,7 +111,7 @@ def electionInAction(request , elections_id =""):
     songs = []
 
     template1 = loader.get_template("UserPage.html")
-    request.POST["Elections"] = elections_id
+    request.session["Elections"] = elections_id
 
     for song in songsInElect:
         songs.append(song.song)
@@ -124,26 +123,27 @@ def electionInAction(request , elections_id =""):
 def vote(request):
     election_id = request.session['Elections']
     elections = Elections.objects.filter(id = election_id).first()
-    song = Song.objects.filter(id = request.POST["song"])
+    song = Song.objects.filter(id = request.POST["song"]).first()
     songInElection = SongsInElections.objects.filter(elections=elections,song=song).first()
 
-    with transaction.Atomic():
+    with transaction.atomic():
         songInElection.vote()
         songInElection.save()
 
-    return HttpResponse("Thanko you for you'r vote")
+    return HttpResponse("Thank you for you'r vote")
 
 
 def finishElectionDj(request):
 
     dj_id = request.session['DJ_ID']
-    dj = DJ.objects.filter(id = dj_id)
+    dj = DJ.objects.filter(id = dj_id).first()
     lastElections = Elections.objects.filter(dj=dj).order_by('-startTime').first()
     songs = SongsInElections.objects.filter(elections = lastElections)
 
     wininigSong = findTheWinner(songs)
+    song = Song.objects.filter(id = wininigSong.song.id).first()
 
-    return HttpResponse("the wining song is "+ wininigSong.name+" "+"name")
+    return HttpResponse("the wining song is "+ song.name)
 
 
 

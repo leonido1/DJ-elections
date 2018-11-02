@@ -80,7 +80,7 @@ def mainAction(request):
 
 def checkUpDate (request,djName=""):
 
-    present = datetime.now(timezone.utc)+timedelta(hours=2)
+    present = datetime.now(timezone.utc)+timedelta(hours=3)
     dj = DJ.objects.filter(username=djName).first()
     elections = Elections.objects.filter(dj=dj).order_by('-endTime').first()
     print(present)
@@ -130,7 +130,6 @@ def vote(request):
     with transaction.Atomic():
         songInElection.vote()
         songInElection.save()
-
 
     return HttpResponse("Thanko you for you'r vote")
 
